@@ -1,0 +1,19 @@
+<?xml version="1.0.0" ?>
+
+<!-- 
+  This launch file runs the object tracker
+-->  
+<launch>
+
+  <!-- Start the node in the AGV namespace -->
+  <group ns="$(optenv NAMESPACE default)">
+    
+    <!--
+    Run local sidereal time
+    -->
+    <node pkg="local_sidereal_time" type="local_sidereal_time_node" name="local_sidereal_time" output="screen" required="true" />
+
+  </group>
+
+</launch>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+
+  <name>start</name>
+  
+  <version>0.0.0</version>
+  
+  <description>
+    The start package. Contains all files to start the AGV.
+  </description>
+
+  <author>Christophe Heymann</author>
+
+  <maintainer email="c.heymann@cms-automatisme.com"/>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>
