@@ -9,6 +9,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(DIRECTORY msg
   FILES
+  EquatorialCoordinates.msg
+  EquatorialCoordinatesText.msg
   MotorsPositionCommand.msg
   MotorsStatus.msg
   PositionHourAngleTextFormat.msg

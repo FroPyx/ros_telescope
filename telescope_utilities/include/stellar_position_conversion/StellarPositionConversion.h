@@ -5,6 +5,8 @@
 #include <cmath>
 #include <iomanip>
 #include <vector>
+#include <telescope_msgs/EquatorialCoordinates.h>
+#include <telescope_msgs/EquatorialCoordinatesText.h>
 
 /**
 ** Define the radToDegree function
@@ -261,22 +263,83 @@ std::string radToHMS(const double& rad)
 }
 
 
+
 /**
 ** Define the equatorialCoordinatesRadToDegree function
 */
-std::vector<double> equatorialCoordinatesRadToDegree(const std::vector<double>& equatorial_coordinates_rad)
+telescope_msgs::EquatorialCoordinates equatorialCoordinatesRadToDegree(const telescope_msgs::EquatorialCoordinates& equatorial_coordinates_rad)
 {
   // Initialize the equatorial_coordinates_degree
-  std::vector<double> equatorial_coordinates_degree;
+  telescope_msgs::EquatorialCoordinates equatorial_coordinates_degree;
 
   // Add RA coordinate
-  equatorial_coordinates_degree.push_back(radToDegree(equatorial_coordinates_rad[0]));
+  equatorial_coordinates_degree.ra = radToDegree(equatorial_coordinates_rad.ra);
 
   // Add DEC coordinate
-  equatorial_coordinates_degree.push_back(radToDegree(equatorial_coordinates_rad[1]));
+  equatorial_coordinates_degree.dec = radToDegree(equatorial_coordinates_rad.dec);
 
   // Return equatorial_coordinates_degree
   return equatorial_coordinates_degree;
+}
+
+
+
+/**
+** Define the equatorialCoordinatesDegreeToRad function
+*/
+telescope_msgs::EquatorialCoordinates equatorialCoordinatesDegreeToRad(const telescope_msgs::EquatorialCoordinates& equatorial_coordinates_degree)
+{
+  // Initialize the equatorial_coordinates_rad
+  telescope_msgs::EquatorialCoordinates equatorial_coordinates_rad;
+
+  // Add RA coordinate
+  equatorial_coordinates_rad.ra = radToDegree(equatorial_coordinates_degree.ra);
+
+  // Add DEC coordinate
+  equatorial_coordinates_rad.dec = radToDegree(equatorial_coordinates_degree.dec);
+
+  // Return equatorial_coordinates_rad
+  return equatorial_coordinates_rad;
+}
+
+
+
+/**
+** Define the equatorialCoordinatesDegreeToText function
+*/
+telescope_msgs::EquatorialCoordinatesText equatorialCoordinatesDegreeToText(const telescope_msgs::EquatorialCoordinates& equatorial_coordinates_degree)
+{
+  // Initialize the equatorial_coordinates_text
+  telescope_msgs::EquatorialCoordinatesText equatorial_coordinates_text;
+
+  // Add RA coordinate
+  equatorial_coordinates_text.ra = degreeToHMS(equatorial_coordinates_degree.ra);
+
+  // Add DEC coordinate
+  equatorial_coordinates_text.dec = degreeToDMS(equatorial_coordinates_degree.dec);
+
+  // Return equatorial_coordinates_text
+  return equatorial_coordinates_text;
+}
+
+
+
+/**
+** Define the equatorialCoordinatesRadToText function
+*/
+telescope_msgs::EquatorialCoordinatesText equatorialCoordinatesRadToText(const telescope_msgs::EquatorialCoordinates& equatorial_coordinates_rad)
+{
+  // Initialize the equatorial_coordinates_text
+  telescope_msgs::EquatorialCoordinatesText equatorial_coordinates_text;
+
+  // Add RA coordinate
+  equatorial_coordinates_text.ra = radToHMS(equatorial_coordinates_rad.ra);
+
+  // Add DEC coordinate
+  equatorial_coordinates_text.dec = radToDMS(equatorial_coordinates_rad.dec);
+
+  // Return equatorial_coordinates_rad
+  return equatorial_coordinates_text;
 }
 
 #endif // STELLAR_POSITION_CONVERSION_H

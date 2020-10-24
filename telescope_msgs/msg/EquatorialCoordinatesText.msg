@@ -1,0 +1,2 @@
+string ra
+string dec
