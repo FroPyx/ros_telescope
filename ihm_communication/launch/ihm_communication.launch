@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<launch>
+
+
+  <!-- This launch file starts the command velocity remapper -->
+
+  <!-- Start the node in the AGV namespace -->
+  <group ns="$(optenv NAMESPACE default)">
+
+    <!--
+    Run rosbridge_server node on WiFi
+    - This node is the bridge between messages from the AGV and external messages (other PC, tablet, ...)
+    -->
+    <node name="rosbridge_server" pkg="rosbridge_server" type="rosbridge_tcp">
+      <param name="host" value="$(optenv ROS_IP localhost)" />
+    </node>    
+
+
+    <!--
+    Run rosbridge_server on local network
+    - This node is the bridge between messages from the AGV and external messages (other PC, tablet, ...)
+    -->
+    <node name="local_rosbridge_server" pkg="rosbridge_server" type="rosbridge_tcp">
+      <param name="host" value="192.168.0.31" />
+      <param name="port" value="9090" />
+      <remap from="client_count" to="local_client_count" />
+    </node>
+
+  </group>
+
+</launch>

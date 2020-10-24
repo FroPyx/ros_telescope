@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package format="2">
 
-  <name>object_tracker</name>
+  <name>test_unit</name>
 
   <version>0.0.0</version>
 
-  <description>The object_tracker package</description>
+  <description>The test_unit package</description>
 
   <maintainer email="christophe@todo.todo">christophe</maintainer>
 
@@ -13,16 +13,10 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>telescope_msgs</build_depend>
   <build_depend>telescope_utilities</build_depend>
   <build_export_depend>roscpp</build_export_depend>
-  <build_export_depend>std_msgs</build_export_depend>
-  <build_export_depend>telescope_msgs</build_export_depend>
   <build_export_depend>telescope_utilities</build_export_depend>
   <exec_depend>roscpp</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
-  <exec_depend>telescope_msgs</exec_depend>
   <exec_depend>telescope_utilities</exec_depend>
 
 
