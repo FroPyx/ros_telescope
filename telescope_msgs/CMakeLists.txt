@@ -13,13 +13,12 @@ add_message_files(DIRECTORY msg
   EquatorialCoordinatesText.msg
   MotorsPositionCommand.msg
   MotorsStatus.msg
-  PositionHourAngleTextFormat.msg
-  SpeedCommand.msg
 )
 
-#add_service_files(DIRECTORY srv
-#  FILES
-#)
+add_service_files(DIRECTORY srv
+  FILES
+  ChangeTrackingMode.srv
+)
 
 #add_action_files(DIRECTORY action
 #  FILES

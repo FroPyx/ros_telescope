@@ -15,6 +15,12 @@ CelestialTracker::CelestialTracker()
   // Initialize the telescope_command_subscriber
   telescope_position_command_subscriber_ = n_.subscribe("telescope_position_command/rad", 1, &CelestialTracker::telescopePositionCommandCallback, this);
 
+  // Initialize the change_tracking_mode_service_server
+  change_tracking_mode_service_server_ = n_.advertiseService("change_tracking_mode", &CelestialTracker::changeTrackingModeServiceCallback, this);
+
+  // Initialize the current_tracking_mode
+  current_tracking_mode_ = telescope_msgs::ChangeTrackingMode::Request::NONE;
+
 }
 
 
@@ -108,3 +114,28 @@ void CelestialTracker::telescopePositionCommandCallback(const telescope_msgs::Eq
 }
 
 
+/**
+** Define the CelestialTracker changeTrackingModeServiceCallback function
+*/
+bool CelestialTracker::changeTrackingModeServiceCallback(telescope_msgs::ChangeTrackingModeRequest& req, telescope_msgs::ChangeTrackingModeResponse& res)
+{
+  // Switch from req mode
+  switch (req.mode)
+  {
+    // None mode
+    case telescope_msgs::ChangeTrackingMode::Request::NONE:
+      // Change current_tracking_mode
+      current_tracking_mode_ = telescope_msgs::ChangeTrackingMode::Request::NONE;
+      // Set response to 0 (no error)
+      res.result = 0;
+      break;
+
+    default:
+      // Set response to -1 (unknow mode)
+      res.result = -1;
+      break;
+  }
+  // Return true (no error while handling mode change)
+  // Error in mode value handled by res.result
+  return true;
+}

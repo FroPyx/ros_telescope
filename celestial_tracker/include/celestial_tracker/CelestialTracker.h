@@ -4,18 +4,7 @@
 // Include libraries
 #include <ros/ros.h>
 #include <stellar_position_conversion/StellarPositionConversion.h>
-
-
-enum TrackStatus
-{
-  NOTHING = 0,
-  MANUAL = 1,
-  MANUAL_TRACKING = 2,
-  DSO = 3,
-  SSO = 4,
-  LUNAR = 5,
-  SOLAR = 6
-};
+#include <telescope_msgs/ChangeTrackingMode.h>
 
 
 // Define the CelestialTracker class
@@ -49,6 +38,10 @@ private:
   // Define the telescope_position_command_subscriber
   ros::Subscriber telescope_position_command_subscriber_;
 
+  // Define the change_tracking_mode_service_server
+  ros::ServiceServer change_tracking_mode_service_server_;
+
+
   // Define the telescope_position
   telescope_msgs::EquatorialCoordinates telescope_position_;
 
@@ -61,9 +54,15 @@ private:
   // Define the rad_to_ra_motor_position
   double rad_to_dec_motor_position_;
 
+  // Define the current_tracking_mode
+  uint8_t current_tracking_mode_;
+
 
   // Define the telescopePositionCommandCallback function
   void telescopePositionCommandCallback(const telescope_msgs::EquatorialCoordinates& telescope_position_command_data);
+
+  // Define the changeTrackingModeServiceCallback function
+  bool changeTrackingModeServiceCallback(telescope_msgs::ChangeTrackingModeRequest& req, telescope_msgs::ChangeTrackingModeResponse& res);
 
 
 }; // CelestialTracker

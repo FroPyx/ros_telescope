@@ -18,10 +18,10 @@
 
   
   <!-- 
-  Load the object tracker launch file
+  Load the celestial tracker launch file
   - Track an object in the sky
   -->
-  <include file="$(find object_tracker)/launch/object_tracker.launch" />
+  <include file="$(find celestial_tracker)/launch/celestial_tracker.launch" />
 
   
   <!-- 
