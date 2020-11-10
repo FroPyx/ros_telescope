@@ -14,21 +14,21 @@
   Load the telescope motors controler launch file
   - Control the motors of the telescope
   -->
-  <include file="$(find telescope_motors_controler)/launch/telescope_motors_controler.launch" />
+  <include file="$(find telescope_motors_connector)/launch/telescope_motors_controler.launch" />
 
   
   <!-- 
-  Load the object tracker launch file
+  Load the celestial tracker launch file
   - Track an object in the sky
   -->
-  <include file="$(find object_tracker)/launch/object_tracker.launch" />
+  <include file="$(find celestial_tracker)/launch/celestial_tracker.launch" />
 
   
   <!-- 
   Load the ihm communication launch file
   - Communication with the IHM
   -->
-  <include file="$(find misc)/launch/ihm_communication.launch" />
+  <include file="$(find ihm_communication)/launch/ihm_communication.launch" />
   
 
 

@@ -1,4 +1,5 @@
 #include <local_sidereal_time/LocalSiderealTime.h>
+#include <stellar_position_conversion/StellarPositionConversion.h>
 #include <iomanip>
 
 /**
@@ -99,7 +100,7 @@ void LocalSiderealTime::publishLocalSiderealTimeHourAngle()
 void LocalSiderealTime::publishLocalSiderealTimeRad()
 {
   std_msgs::Float64 local_sidereal_time_rad;
-  local_sidereal_time_rad.data = local_sidereal_time_*360*M_PI/(180.0*24.0);
+  local_sidereal_time_rad.data = hourAngleToRad(local_sidereal_time_);
   local_sideral_time_rad_publisher_.publish(local_sidereal_time_rad);
 }
 
@@ -110,29 +111,6 @@ void LocalSiderealTime::publishLocalSiderealTimeRad()
 void LocalSiderealTime::publishLocalSiderealTimeText()
 {
   std_msgs::String local_sidereal_time_text;
-
-  // Calculate hour minutes seconds
-  int h = static_cast<int>(local_sidereal_time_);
-  int m = static_cast<int>((local_sidereal_time_ - h)*60);
-  double s = (local_sidereal_time_ - h - m/60.0)*3600;
-
-  // Convert hour angle data to text
-  local_sidereal_time_text.data = std::to_string(h) + "h";
-  if (m < 10)
-  {
-    local_sidereal_time_text.data += "0" + std::to_string(m) + "m";
-  }
-  else
-  {
-    local_sidereal_time_text.data += std::to_string(m) + "m";
-  }
-  if (s < 10.0)
-  {
-    local_sidereal_time_text.data += "0" + std::to_string(s) + "s";
-  }
-  else
-  {
-    local_sidereal_time_text.data += std::to_string(s) + "s";
-  }
+  local_sidereal_time_text.data = hourAngleToHMS(local_sidereal_time_);
   local_sideral_time_text_publisher_.publish(local_sidereal_time_text);
 }

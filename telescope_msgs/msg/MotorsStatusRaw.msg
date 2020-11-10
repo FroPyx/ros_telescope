@@ -1,0 +1,3 @@
+bool motors_enabled
+int32 ra_motor_position
+int32 dec_motor_position

@@ -1,3 +1,6 @@
-bool motors_connection_status
-bool motors_status
-int32[] motors_position
+bool motors_connected
+bool motors_enabled
+float64 ra_motor_position_rad
+float64 dec_motor_position_rad
+string ra_motor_position_hms
+string dec_motor_position_dms

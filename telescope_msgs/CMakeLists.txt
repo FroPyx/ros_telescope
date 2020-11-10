@@ -9,15 +9,16 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(DIRECTORY msg
   FILES
-  MotorsPositionCommand.msg
+  EquatorialCoordinates.msg
+  EquatorialCoordinatesText.msg
   MotorsStatus.msg
-  PositionHourAngleTextFormat.msg
-  SpeedCommand.msg
+  MotorsStatusRaw.msg
 )
 
-#add_service_files(DIRECTORY srv
-#  FILES
-#)
+add_service_files(DIRECTORY srv
+  FILES
+  ChangeTrackingMode.srv
+)
 
 #add_action_files(DIRECTORY action
 #  FILES
