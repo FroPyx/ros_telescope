@@ -2,9 +2,7 @@
 #include <ros.h>
 #include <std_msgs/Int32.h>
 #include <std_msgs/Bool.h>
-#include <telescope_msgs/MotorsStatusRaw.h>
 #include <AccelStepper.h>
-
 
 // Define stepper motor connections
 #define ra_direction_pin_ 5
@@ -31,9 +29,23 @@ unsigned long time_since_last_motors_status_publication_;
 // Define the motors_status_publication_timeout_
 unsigned long motors_status_publication_timeout_;
 
-// Define the motors status topic
-telescope_msgs::MotorsStatusRaw motors_status_;
+// Define the ra_motor_position topic
+std_msgs::Int32 ra_motor_position_;
 
+// Define the dec_motor_position topic
+std_msgs::Int32 dec_motor_position_;
+
+// Define the enable_motors_status topic
+std_msgs::Bool enable_motors_status_;
+
+// Define the ra_motor_position_publisher
+ros::Publisher ra_motor_position_publisher_("ra_motor_position", &ra_motor_position_);
+
+// Define the dec_motor_position_publisher
+ros::Publisher dec_motor_position_publisher_("dec_motor_position", &dec_motor_position_);
+
+// Define the dec_motors_position_publisher
+ros::Publisher enable_motors_status_publisher_("enable_motors_status", &enable_motors_status_);
 
 /** 
  * Define raMotorPositionCommandCallback function
@@ -62,12 +74,14 @@ void enableMotorsCommandCallback(const std_msgs::Bool& enable_motors_command_dat
   if (enable_motors_command_data.data)
   {
     ra_motor_.enableOutputs();
-    motors_status_.motors_enabled = true;
+    dec_motor_.enableOutputs();
+    enable_motors_status_.data = true;
   }
   else
   {
     ra_motor_.disableOutputs();
-    motors_status_.motors_enabled = false;
+    dec_motor_.disableOutputs();
+    enable_motors_status_.data = false;
   }
 }
 
@@ -81,15 +95,15 @@ ros::Subscriber<std_msgs::Int32> dec_motor_command_subscriber_("dec_motor_comman
 ros::Subscriber<std_msgs::Bool> enable_motors_command_subscriber_("enable_motors_command", &enableMotorsCommandCallback);
 
 
-// Define the motors_status_publisher
-ros::Publisher motors_status_publisher_("motor_status", &motors_status_);
-
-
 /** 
  * Define setup function (initialize serial and output)
  */
 void setup()
 {
+  // Initalize node handler
+  n_.getHardware()->setBaud(115200);
+  n_.initNode();
+  
   // Initialize time
   time_since_last_motors_status_publication_ = millis();
 
@@ -97,14 +111,14 @@ void setup()
   motors_status_publication_timeout_ = 200;
 
   // Initialize motors status
-  motors_status_.motors_enabled = false;
-  motors_status_.ra_motor_position = 0;
-  motors_status_.dec_motor_position = 0;
+  enable_motors_status_.data = false;
+  ra_motor_position_.data = 0;
+  dec_motor_position_.data = 0;
   
   // Set ra_motor speed and acceleration
-  ra_motor_.setMaxSpeed(200);
-  ra_motor_.setSpeed(200);
-  ra_motor_.setAcceleration(50);
+  ra_motor_.setMaxSpeed(4500);
+  ra_motor_.setSpeed(4500);
+  ra_motor_.setAcceleration(500);
 
   // Set ra_motor enable pin (controls dec motor too)
   ra_motor_.setEnablePin(enable_pin_);
@@ -114,6 +128,23 @@ void setup()
   dec_motor_.setMaxSpeed(4500);
   dec_motor_.setSpeed(4500);
   dec_motor_.setAcceleration(500);
+
+  // Initialize the motors_status_publisher
+  n_.advertise(ra_motor_position_publisher_);
+  n_.advertise(dec_motor_position_publisher_);
+  n_.advertise(enable_motors_status_publisher_);
+  
+  // Initialize the ra_motor_command_subscriber
+  n_.subscribe(ra_motor_command_subscriber_);
+
+  // Initialize the dec_motor_command_subscriber
+  n_.subscribe(dec_motor_command_subscriber_);
+
+  // Initialize the enable_motors_command_subscriber_
+  n_.subscribe(enable_motors_command_subscriber_);
+
+  // Delay
+  delay(1000);
 }
 
 
@@ -139,7 +170,7 @@ void loop()
 void setMotorsPosition()
 {
   // If motors are enabled
-  if (motors_status_.motors_enabled)
+  if (enable_motors_status_.data)
   {
     // Control ra motor position
     ra_motor_.run();
@@ -158,12 +189,16 @@ void publishMotorsStatus()
   // Check if timeout for publication
   if (millis() - time_since_last_motors_status_publication_ > motors_status_publication_timeout_)
   {
-    // Update motors status information
-    motors_status_.ra_motor_position = ra_motor_.currentPosition();
-    motors_status_.dec_motor_position = dec_motor_.currentPosition();
+    // Update motors position information
+    ra_motor_position_.data = ra_motor_.currentPosition();
+    dec_motor_position_.data = dec_motor_.currentPosition();
 
-    // Publish motors_status
-    motors_status_publisher_.publish(&motors_status_);
+    // Publish motors position
+    ra_motor_position_publisher_.publish(&ra_motor_position_);
+    dec_motor_position_publisher_.publish(&dec_motor_position_);
+
+    // Publish enable motors status
+    enable_motors_status_publisher_.publish(&enable_motors_status_);
 
     // Update time since motors status publication
     time_since_last_motors_status_publication_ = millis();
