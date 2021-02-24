@@ -1,2 +1,0 @@
-string ra
-string dec

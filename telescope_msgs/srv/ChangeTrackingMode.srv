@@ -1,7 +1,0 @@
-# Possible modes of tracking
-uint8 NONE=0
-uint8 MANUAL=1
-
-uint8 mode
----
-int8 result
