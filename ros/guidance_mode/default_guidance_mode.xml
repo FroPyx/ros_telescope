@@ -1,0 +1,7 @@
+<class_libraries>
+  <library path="lib/libaction_plugins">
+    <class type="guidance_plugin::BaseGuidance" base_class_type="guidance_plugin::BaseGuidance">
+      <description>Mode that guide the mount on user command (with tracking possible).</description>
+    </class>
+  </library>
+</class_libraries>
