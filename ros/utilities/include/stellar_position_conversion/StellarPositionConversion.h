@@ -5,8 +5,8 @@
 #include <cmath>
 #include <iomanip>
 #include <vector>
-#include <telescope_msgs/EquatorialCoordinates.h>
-#include <telescope_msgs/EquatorialCoordinatesText.h>
+#include <mount_msgs/EquatorialCoordinates.h>
+#include <mount_msgs/EquatorialCoordinatesText.h>
 
 /**
 ** Define the radToDegree function
@@ -267,10 +267,10 @@ std::string radToHMS(const double& rad)
 /**
 ** Define the equatorialCoordinatesRadToDegree function
 */
-telescope_msgs::EquatorialCoordinates equatorialCoordinatesRadToDegree(const telescope_msgs::EquatorialCoordinates& equatorial_coordinates_rad)
+mount_msgs::EquatorialCoordinates equatorialCoordinatesRadToDegree(const mount_msgs::EquatorialCoordinates& equatorial_coordinates_rad)
 {
   // Initialize the equatorial_coordinates_degree
-  telescope_msgs::EquatorialCoordinates equatorial_coordinates_degree;
+  mount_msgs::EquatorialCoordinates equatorial_coordinates_degree;
 
   // Add RA coordinate
   equatorial_coordinates_degree.ra = radToDegree(equatorial_coordinates_rad.ra);
@@ -287,10 +287,10 @@ telescope_msgs::EquatorialCoordinates equatorialCoordinatesRadToDegree(const tel
 /**
 ** Define the equatorialCoordinatesDegreeToRad function
 */
-telescope_msgs::EquatorialCoordinates equatorialCoordinatesDegreeToRad(const telescope_msgs::EquatorialCoordinates& equatorial_coordinates_degree)
+mount_msgs::EquatorialCoordinates equatorialCoordinatesDegreeToRad(const mount_msgs::EquatorialCoordinates& equatorial_coordinates_degree)
 {
   // Initialize the equatorial_coordinates_rad
-  telescope_msgs::EquatorialCoordinates equatorial_coordinates_rad;
+  mount_msgs::EquatorialCoordinates equatorial_coordinates_rad;
 
   // Add RA coordinate
   equatorial_coordinates_rad.ra = radToDegree(equatorial_coordinates_degree.ra);
@@ -307,10 +307,10 @@ telescope_msgs::EquatorialCoordinates equatorialCoordinatesDegreeToRad(const tel
 /**
 ** Define the equatorialCoordinatesDegreeToText function
 */
-telescope_msgs::EquatorialCoordinatesText equatorialCoordinatesDegreeToText(const telescope_msgs::EquatorialCoordinates& equatorial_coordinates_degree)
+mount_msgs::EquatorialCoordinatesText equatorialCoordinatesDegreeToText(const mount_msgs::EquatorialCoordinates& equatorial_coordinates_degree)
 {
   // Initialize the equatorial_coordinates_text
-  telescope_msgs::EquatorialCoordinatesText equatorial_coordinates_text;
+  mount_msgs::EquatorialCoordinatesText equatorial_coordinates_text;
 
   // Add RA coordinate
   equatorial_coordinates_text.ra = degreeToHMS(equatorial_coordinates_degree.ra);
@@ -327,10 +327,10 @@ telescope_msgs::EquatorialCoordinatesText equatorialCoordinatesDegreeToText(cons
 /**
 ** Define the equatorialCoordinatesRadToText function
 */
-telescope_msgs::EquatorialCoordinatesText equatorialCoordinatesRadToText(const telescope_msgs::EquatorialCoordinates& equatorial_coordinates_rad)
+mount_msgs::EquatorialCoordinatesText equatorialCoordinatesRadToText(const mount_msgs::EquatorialCoordinates& equatorial_coordinates_rad)
 {
   // Initialize the equatorial_coordinates_text
-  telescope_msgs::EquatorialCoordinatesText equatorial_coordinates_text;
+  mount_msgs::EquatorialCoordinatesText equatorial_coordinates_text;
 
   // Add RA coordinate
   equatorial_coordinates_text.ra = radToHMS(equatorial_coordinates_rad.ra);

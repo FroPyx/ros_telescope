@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+
+  <name>mount_msgs</name>
+  
+  <version>1.0.0</version>
+  
+  <description>
+    The mount_msgs package. Contains all the messages and services files.
+  </description>
+
+  <maintainer email="christophe.heymann@gmail.com">Christophe Heymann</maintainer>
+  
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <depend>message_generation</depend>
+  <depend>message_runtime</depend>
+
+</package>

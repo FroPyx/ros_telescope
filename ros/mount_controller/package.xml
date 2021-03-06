@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package format="2">
 
-  <name>mount_interface</name>
+  <name>mount_controller</name>
 
-  <version>1.0.3</version>
+  <version>1.0.0</version>
 
-  <description>The mount_interface package</description>
+  <description>The mount_controller package</description>
 
   <maintainer email="christophe.heymann@gmail.com">Christophe Heymann</maintainer>
 
@@ -15,6 +15,7 @@
 
   <depend>roscpp</depend>
   <depend>std_msgs</depend>
-  <depend>serial</depend>
+  <depend>mount_msgs</depend>
+  <depend>utilities</depend>
 
 </package>

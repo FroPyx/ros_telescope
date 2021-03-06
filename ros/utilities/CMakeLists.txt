@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(telescope_utilities)
+project(utilities)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
-  telescope_msgs
+  mount_msgs
 )
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS roscpp std_msgs telescope_msgs
+  CATKIN_DEPENDS roscpp std_msgs mount_msgs
 )
 
 

@@ -1,0 +1,24 @@
+<?xml version="1.0.0" ?>
+
+<!-- 
+  This launch file runs the mount interface
+-->  
+<launch>
+
+  <!-- Start the node in the namespace -->
+  <group ns="$(optenv NAMESPACE default)">
+
+    <!--
+    Run mount_interface node
+    -->
+    <node pkg="mount_interface" type="mount_interface_node" name="mount_interface" output="screen">
+      <param name="control_rate" value="25" />
+      <param name="serial_port" value="/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0" />
+      <param name="serial_baudrate" value="115200" />
+      <param name="serial_timeout" value="1000" />
+    </node>
+
+  </group>
+
+</launch>
+

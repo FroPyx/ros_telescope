@@ -1,0 +1,27 @@
+<?xml version="1.0.0" ?>
+
+<!-- 
+  This launch file runs the mount controller
+-->  
+<launch>
+
+  <!-- Start the node in the namespace -->
+  <group ns="$(optenv NAMESPACE default)">
+
+    <!--
+    Run object tracker node
+    -->
+    <node pkg="mount_controller" type="mount_controller_node" name="mount_controller_node" output="screen" required="true">
+      <param name="ra_motor_step_per_revolution" value="200" />
+      <param name="dec_motor_step_per_revolution" value="200" />
+      <param name="ra_motor_microstep" value="16" />
+      <param name="dec_motor_microstep" value="16" />
+      <param name="ra_gear_ratio" value="3" />
+      <param name="dec_gear_ratio" value="3" />
+      <param name="ra_worm_gear_ratio" value="130" />
+      <param name="dec_worm_gear_ratio" value="65" />
+    </node>
+
+  </group>
+
+</launch>
